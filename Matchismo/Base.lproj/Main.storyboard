@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -381,6 +381,9 @@
                                     <segment title="2-Cards"/>
                                     <segment title="3-Cards"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segCtrlValueChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Hse-Oz-pBd"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -390,6 +393,7 @@
                         <outlet property="flipsLabel" destination="lCu-RG-WhR" id="iXJ-Cw-tK0"/>
                         <outlet property="lastActionLabel" destination="84F-FB-FZE" id="8zY-LZ-1TV"/>
                         <outlet property="scoreLabel" destination="vnc-Mt-pFX" id="y2W-Qu-0sk"/>
+                        <outlet property="segCtrl" destination="jnC-m8-HHY" id="Nw8-BZ-wdD"/>
                         <outlet property="sliderCtrl" destination="EUc-3X-Kdl" id="FDs-L0-sMl"/>
                         <outletCollection property="cardButtons" destination="xtr-7e-5z6" id="P6u-hS-zbp"/>
                         <outletCollection property="cardButtons" destination="VuE-UU-HDH" id="bDX-gC-Dtt"/>

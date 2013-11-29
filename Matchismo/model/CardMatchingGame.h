@@ -19,6 +19,10 @@
 -(id)initWithCardCount:(NSUInteger)count
              usingDeck:(Deck*)deck;
 
+-(id)initWithCardCount:(NSUInteger)count
+andNumberOfCardToMAtch:(NSUInteger)nbrCard
+             usingDeck:(Deck*)deck;
+
 -(void) flipCardAtIndex:(NSUInteger) index;
 -(Card*) cardAtIndex:(NSUInteger) index;
 

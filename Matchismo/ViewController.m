@@ -14,9 +14,11 @@
 @interface ViewController ()
 
 @property (nonatomic) int flipCount;
+@property (nonatomic) int numCard;
 @property (strong, nonatomic) NSMutableArray *actionHistory;
 @property (strong, nonatomic) UIImage *frontCardImg;
 @property (strong, nonatomic) UIImage *backCardImg;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segCtrl;
 
 
 @property (weak, nonatomic) IBOutlet UIButton *cardButton;
@@ -29,11 +31,16 @@
 
 - (IBAction)dealCards:(id)sender;
 - (IBAction)sliderValueChanged:(id)sender;
+- (IBAction)segCtrlValueChanged:(id)sender;
 
 @end
 
 @implementation ViewController
 
+-(int)numCard{
+    if(!_numCard) _numCard = 2;
+    return _numCard;
+}
 
 -(UIImage *)backCardImg{
     if(!_backCardImg) _backCardImg = [UIImage imageNamed:@"backcard.jpg"];
@@ -46,8 +53,11 @@
 }
 
 -(CardMatchingGame *)game{
-    if(!_game) _game = [[CardMatchingGame alloc]initWithCardCount:[self.cardButtons count]
-                                                        usingDeck:[[PlayingCardDeck alloc]init]];
+    
+    if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                            andNumberOfCardToMAtch:self.numCard
+                                                         usingDeck:[[PlayingCardDeck alloc]init]];
+    
     return _game;
 }
 
@@ -73,6 +83,7 @@
     
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
+    self.segCtrl.enabled = NO;
      [self updateUI];
 }
 
@@ -104,7 +115,7 @@
     
     if(self.game.lastAction){
         [self.actionHistory addObject:self.game.lastAction];
-        self.sliderCtrl.minimumValue = 0;
+     self.sliderCtrl.minimumValue = 0;
         self.sliderCtrl.maximumValue = [self.actionHistory count]-1;
         self.sliderCtrl.value = [self.actionHistory count]-1;
     }
@@ -114,6 +125,7 @@
     self.game = nil;
     self.flipCount = 0;
     self.actionHistory = nil;
+    self.segCtrl.enabled = YES;
     [self updateUI];
 }
 
@@ -129,5 +141,21 @@
             self.lastActionLabel.alpha=0.3;
         }
     }
+}
+
+- (IBAction)segCtrlValueChanged:(id)sender {
+    
+    switch(self.segCtrl.selectedSegmentIndex){
+       case 0:
+            self.numCard = 2;
+            [self dealCards:nil];
+            break;
+       case 1:
+            self.numCard = 3;
+            [self dealCards:nil];
+            break;
+    }
+    
+    self.segCtrl.enabled = NO;
 }
 @end
